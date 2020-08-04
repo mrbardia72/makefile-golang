@@ -5,7 +5,7 @@ include $(cnf)
 export $(shell sed 's/=.*//' $(cnf))
 
 version_golang=$(shell ./version.sh)
-LOGFILE=$(LOGPATH)$(shell date)
+LOGFILE=$(LOGPATH) `date +'%y.%m.%d %H:%M:%S'`
 
 .PHONY: proto
 proto: ## proto the proto file.
