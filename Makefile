@@ -74,14 +74,14 @@ docker-push: ## docker push
 	docker push $(TAG):$(VER)
 
 .PHONY: commit
-commit: ## commit to github exp. run--- make commit m="your message"
+commit: ## commit to github exp. run--- make commit m="your-message"
 	git add .
 	git commit -m "$m-${LOGFILE}"
 	git push -u origin master 
 
 
 .PHONY: git-push
-git-push: ## push to github exp. run--- make git-push m="your message" $u="https://github.com/mrbardia72/makefile-golang.git"
+git-push: ## push to github exp. run--- make git-push m="your-message" $u="https://github.com/your-username/your-repository.git"
 	git init
 	git add .
 	git commit -m "$m-${LOGFILE}"
