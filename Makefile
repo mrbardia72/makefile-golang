@@ -5,6 +5,7 @@ include $(cnf)
 export $(shell sed 's/=.*//' $(cnf))
 
 version_golang=$(shell ./version.sh)
+msg_commit=$(shell ./date.sh)
 
 .PHONY: proto
 proto: ## proto the proto file.
