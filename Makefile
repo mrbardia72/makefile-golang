@@ -76,7 +76,7 @@ docker-push: ## docker push
 .PHONY: commit
 commit: ## commit to github exp. run--- make commit m="your message"
 	git add .
-	git commit -m "$m-${msg_commit}"
+	git commit -m "$m-$(date '+%A-%b-%d-%Y-%H-%M-%S')"
 	git push -u origin master 
 
 
