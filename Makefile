@@ -5,7 +5,7 @@ include $(cnf)
 export $(shell sed 's/=.*//' $(cnf))
 
 version_golang=$(shell ./version.sh)
-msg_commit=$(shell ./date.sh)
+LOGFILE=$(LOGPATH)$(shell date)
 
 .PHONY: proto
 proto: ## proto the proto file.
@@ -76,7 +76,7 @@ docker-push: ## docker push
 .PHONY: commit
 commit: ## commit to github exp. run--- make commit m="your message"
 	git add .
-	git commit -m "$m-$(date '+%A-%b-%d-%Y-%H-%M-%S')"
+	git commit -m "$m-${LOGFILE}"
 	git push -u origin master 
 
 
