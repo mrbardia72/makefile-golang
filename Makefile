@@ -84,7 +84,7 @@ commit: ## commit to github exp. run--- make commit m="your message"
 git-push: ## push to github exp. run--- make git-push m="your message" $u="https://github.com/mrbardia72/makefile-golang.git"
 	git init
 	git add .
-	git commit -m "$m"
+	git commit -m "$m-${LOGFILE}"
 	git remote add origin $u
 	git pull --rebase origin master
 	git push origin master 
