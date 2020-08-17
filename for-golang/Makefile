@@ -88,9 +88,3 @@ git-push: ## push to github exp. run--- make git-push m="your-message" $u="https
 	git remote add origin $u
 	git pull --rebase origin master
 	git push origin master 
-
-.PHONY: checkw
-checkw: ## check is file config.env
-ifeq (,$(wildcard ./config.env))
-    @echo Hello world
-endif
