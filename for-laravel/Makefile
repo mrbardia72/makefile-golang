@@ -6,13 +6,13 @@ help: ## This help for cmd.
 .DEFAULT_GOAL := help
 
 .PHONY: commit
-commit: ## commit to gitlab exp. run--- make commit
+commit: ## commit to gitlab exp. run--- make commit m="your-msg"
 	php artisan optimize:clear
 	php artisan config:clear
 	php artisan cache:clear
 	php artisan config:cache
 	git add .
-	git commit -m "bardia-${LOGFILE}"
+	git commit -m "$m-${LOGFILE}"
 	git push 
 
 .PHONY: push
@@ -23,7 +23,7 @@ git-push: ## push to gitlab exp. run--- make push m="your-message" $u="https://g
 	php artisan config:cache
 	git init
 	git add .
-	git commit -m "bardia-${LOGFILE}"
+	git commit -m "$m-${LOGFILE}"
 	git remote add origin $u
 	git pull --rebase origin master
 	git push origin master
@@ -44,8 +44,8 @@ php: ## run laravel
 js: ## run npm 
 	npm run watch
 
-.PHONY: clear-cache
-clear-cache: ## clear cache and har reload
+.PHONY: cache
+cache: ## clear cache and har reload
 	php artisan optimize:clear
 	php artisan config:clear
 	php artisan cache:clear
