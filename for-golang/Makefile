@@ -87,4 +87,19 @@ git-push: ## push to github exp. run--- make git-push m="your-message" $u="https
 	git commit -m "$m-${LOGFILE}"
 	git remote add origin $u
 	git pull --rebase origin master
-	git push origin master 
+	git push origin master
+
+.PHONY: remote
+remote: ## run ... >  make remote n="https://gitlab.com/author-username/author-repository.git" m="your-name-branche"
+	git remote add upstream $n
+	git checkout -b $m
+	git push origin $m
+	git add .
+	git commit -m "your-msg"
+	git push --set-upstream origin $m
+
+.PHONY: push-remote
+push-remote: ## run ...> make push-remote m="your-name-branche"
+	git add .
+	git commit -m "bardia-${LOGFILE}"
+	git push --set-upstream origin $m
