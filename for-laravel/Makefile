@@ -6,37 +6,34 @@ help: ## This help for cmd.
 .DEFAULT_GOAL := help
 
 .PHONY: commit
-commit: ## commit to github exp. run--- make commit m="your-message"
+commit: ## commit to gitlab exp. run--- make commit
 	php artisan optimize:clear
 	php artisan config:clear
 	php artisan cache:clear
 	php artisan config:cache
 	git add .
-	git commit -m "$m-${LOGFILE}"
-	git push -u origin master 
-
+	git commit -m "bardia-${LOGFILE}"
+	git push 
 
 .PHONY: push
-git-push: ## push to github exp. run--- make push m="your-message" $u="https://github.com/your-username/your-repository.git"
+git-push: ## push to gitlab exp. run--- make push m="your-message" $u="https://gitlab.com/your-username/your-repository.git"
 	php artisan optimize:clear
 	php artisan config:clear
 	php artisan cache:clear
 	php artisan config:cache
 	git init
 	git add .
-	git commit -m "$m-${LOGFILE}"
+	git commit -m "bardia-${LOGFILE}"
 	git remote add origin $u
 	git pull --rebase origin master
 	git push origin master
 
 .PHONY: lara
-lara: ## create project laravel... make lara n="your-name-app"
-	toilet -F border -F gay "LARAVEL"
+lara: ## create project laravel...> make lara n="your-name-app"
 	composer create-project --prefer-dist laravel/laravel $n
 
 .PHONY: php
 php: ## run laravel
-	toilet -F border -F gay "LARAVEL"
 	php artisan optimize:clear
 	php artisan config:clear
 	php artisan cache:clear
@@ -45,37 +42,30 @@ php: ## run laravel
 
 .PHONY: js
 js: ## run npm 
-	toilet -F border -F gay "VUEJS"
 	npm run watch
 
 .PHONY: clear-cache
 clear-cache: ## clear cache and har reload
-	toilet -F border -F gay "CHACHE"
 	php artisan optimize:clear
 	php artisan config:clear
 	php artisan cache:clear
 	php artisan config:cache
-	xdotool search --onlyvisible --class Chrome windowfocus key F5
-
+	
 .PHONY: install
 install: ## install package.js and composer.json
 	composer install
-	sudo npm install
+	npm install
 
 .PHONY: dumpautoload
 dumpautoload: ## dumpautoload
-
-	toilet -F border -F gay "dumpautoload"
 	php artisan optimize:clear
 	php artisan config:clear
 	php artisan cache:clear
 	php artisan config:cache
-	xdotool search --onlyvisible --class Chrome windowfocus key F5
 	composer dumpautoload
 
 .PHONY: vue
 vue: ## generate ui vue
-	toilet -F border -F gay "VUE"
 	php artisan ui vue --auth
 	npm i
 	npm run dev
@@ -84,7 +74,6 @@ vue: ## generate ui vue
 
 .PHONY: react
 react: ## generate ui react
-	toilet -F border -F gay "REACT"
 	php artisan ui react --auth
 	npm i
 	npm run dev
@@ -93,9 +82,32 @@ react: ## generate ui react
 
 .PHONY: bts
 bts: ## generate ui bootstrap
-	toilet -F border -F gay "bootstrap"
 	php artisan ui bootstrap --auth
 	npm i
 	npm run dev
 	php artisan key:generate
 	php artisan serve
+
+.PHONY: remote
+remote: ## run ... >  make remote n="https://gitlab.com/author-username/author-repository.git" m="your-name-branche"
+	php artisan optimize:clear
+	php artisan config:clear
+	php artisan cache:clear
+	php artisan config:cache
+	git remote add upstream $n
+	git checkout -b $m
+	git push origin $m
+	git add .
+	git commit -m "your-msg"
+	git push --set-upstream origin $m
+
+.PHONY: push-remote
+push-remote: ## run ...> make push-remote m="your-name-branche"
+	php artisan optimize:clear
+	php artisan config:clear
+	php artisan cache:clear
+	php artisan config:cache
+	git add .
+	git commit -m "bardia-${LOGFILE}"
+	git push --set-upstream origin $m
+	
